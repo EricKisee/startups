@@ -16,6 +16,10 @@ const StartupForm = () => {
     const {toast} = useToast()
     const [errors, setErrors] = useState<Record<string,string>>({})
     const [pitch, setPitch] = useState('')
+    // toast({
+    //     title: "Success",
+    //     description: 'Your startup pitch was created successfully'
+    // })
     const handleFormSubmit = async (prevState:any, formData: FormData) => {
         try{
             const formValues = {

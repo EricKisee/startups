@@ -1,4 +1,3 @@
-
 import { ProjectorIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
