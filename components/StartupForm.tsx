@@ -16,10 +16,6 @@ const StartupForm = () => {
     const {toast} = useToast()
     const [errors, setErrors] = useState<Record<string,string>>({})
     const [pitch, setPitch] = useState('')
-    // toast({
-    //     title: "Success",
-    //     description: 'Your startup pitch was created successfully'
-    // })
     const handleFormSubmit = async (prevState:any, formData: FormData) => {
         try{
             const formValues = {
@@ -31,7 +27,6 @@ const StartupForm = () => {
             }
             await formSchema.parseAsync(formValues)
             const result = await createPitch(prevState, formData, pitch)
-
             if (result.status == 'SUCCESS'){
                 toast({
                     title: "Success",
@@ -39,7 +34,6 @@ const StartupForm = () => {
                 })
                 router.push(`/startup/${result._id}`)
             }
-
             return result
         }catch (error) {
             if (error instanceof z.ZodError){
@@ -52,15 +46,12 @@ const StartupForm = () => {
                 })
                 return { ...prevState, error:"Validation Failed", status:"ERROR"}
             }
-            
             toast ({
                 title: 'Error',
                 description: 'An unexpected error has occured',
                 variant: 'destructive'
             })
             return { ...prevState, error: 'An unexpected error has occured', status: 'ERROR'}
-        }finally{
-
         }
     }
     const [state, formAction, isPending] = useActionState(handleFormSubmit,{error:'', status:'INITIAL'})
